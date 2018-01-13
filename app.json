@@ -1,0 +1,23 @@
+{
+  "name": "Splatnet 2 Stat.ink",
+  "description": "Upload Splatnet Splatoon 2 battle stats to stat.ink",
+  "image": "heroku/python",
+  "repository": "https://github.com/martinemde/splatnet2statink",
+  "keywords": ["python" ],
+  "addons": [ "scheduler" ],
+  "env": {
+    "STAT_INK_API_KEY": {
+      "description": "API token from https://stat.ink/profile",
+      "required": true
+    },
+    "SPLATNET_COOKIE": {
+      "description": "The vaule of iksm_session in the splatnet request cookie",
+      "required": true
+    },
+    "SPLATNET_LANG": {
+      "description": "Splatnet application language. Supported languages: en-US es-MX fr-CA ja-JP en-GB es-ES fr-FR de-DE it-IT nl-NL ru-RU",
+      "required": true,
+      "value": "en-US"
+    }
+  }
+}

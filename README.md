@@ -66,9 +66,33 @@ Running `python splatnet2statink.py -M 900` from the command line launches the s
 
 5. You will then be asked to enter your `iksm_session` token. To obtain it, follow the mitmproxy instructions [here](https://github.com/frozenpandaman/splatnet2statink/wiki/mitmproxy-instructions). This token (used to access your SplatNet battle results) along with your stat.ink API key and language will automatically be saved into `config.txt` for you. You're now ready to upload battles!
 
+### Deploy
+
+Supports deploy to a free Heroku scheduler that will sync battles automatically.
+
+After you have acquired the API key and Cookie mentioned above, deploy the app to Heroku using the following button.
+
+Enter your API key and Cookie into the corresponding fields. You'll need to choose a unique name for this application. Something like `myname-splatnet2statink`.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+When the deploy completes:
+
+1. Click the "Manage App" button at the bottom of the page
+2. Go to your app in Heroku.
+3. Click on "Heroku Scheduler" in the "Installed Add-ons" section.
+4. Click "Add new job"
+5. Enter the command to run: `python splatnet2statink.py -r`
+6. Choose "1 hour" as the frequency. **More frequent updates is unnecessary and puts some excess load on Nintendo's servers, especially during times you are not playing.** [We are trying to be nice to Nintendo.](https://mattisenhower.com/2017/09/15/splatnet-2-login-changes/).
+7. Click "Save". The scheduler will now update stat.ink regularly.
+
+### Support
+
 Have any questions, issues, or suggestions? Feel free to message me on [Twitter](https://twitter.com/frozenpandaman) or [Reddit](https://www.reddit.com/user/frozenpandaman).
 
 質問があれば、ツイッター([@frozenpandaman](https://twitter.com/frozenpandaman))で連絡してください。日本語OK。
+
+Questions regarding heroku deploy should be directed to [@martinemde on Github](https://github.com/martinemde/splatnet2statink).
 
 ### Accessing SplatNet 2 from your browser
 
