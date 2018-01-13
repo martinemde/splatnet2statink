@@ -10,7 +10,7 @@ from builtins import zip
 from builtins import str
 from builtins import range
 from past.utils import old_div
-import os.path, argparse, sys
+import os, os.path, argparse, sys
 import requests, json, time, datetime, random, re
 import msgpack, uuid
 import iksm, dbs
@@ -41,13 +41,17 @@ except (IOError, ValueError):
 
 #########################
 ## API KEYS AND TOKENS ##
-API_KEY       = config_data["api_key"] # for stat.ink
-YOUR_COOKIE   = config_data["cookie"] # iksm_session
+API_KEY = os.environ.get("STAT_INK_API_KEY", config_data["api_key"]) # for stat.ink
+config_data["api_key"] = API_KEY
+
+YOUR_COOKIE = os.environ.get("SPLATNET_COOKIE", config_data["cookie"]) # iksm_session
 try: # support for pre-v1.0.0 config.txts
-	SESSION_TOKEN = config_data["session_token"] # to generate new cookies in the future
+	SESSION_TOKEN = os.environ.get("SESSION_TOKEN", config_data["session_token"]) # to generate new cookies in the future
+	config_data["session_token"] = SESSION_TOKEN
 except:
 	SESSION_TOKEN = ""
-USER_LANG     = config_data["user_lang"] # only works with your game region's supported languages
+USER_LANG = os.environ.get("SPLATNET_LANG", config_data["user_lang"]) # only works with your game region's supported languages
+config_data["user_lang"] = USER_LANG
 #########################
 
 debug = False # print out payload and exit. can use with geargrabber2.py & saving battle jsons
@@ -77,6 +81,8 @@ def custom_key_exists_and_true(key): # https://github.com/frozenpandaman/splatne
 	'''Checks if a given custom key exists in config.txt.'''
 	if key not in ["ignore_private"]:
 		print("(!) checking unexpected custom key")
+	if key == "ignore_private":
+		return True
 	try:
 		if config_data[key].lower() == "true":
 			return True
@@ -200,7 +206,7 @@ def check_for_updates():
 		update_available = StrictVersion(new_version) != StrictVersion(A_VERSION)
 		if update_available:
 			print("There is a new version available.")
-			if os.path.isdir(".git"): # git user
+			if os.path.isdir(".git") and sys.__stdin__.isatty(): # git user
 				update_now = input("Would you like to update now? [Y/n] ")
 				if update_now == "" or update_now[0].lower() == "y":
 					FNULL = open(os.devnull, "w")
