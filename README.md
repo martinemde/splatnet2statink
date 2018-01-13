@@ -62,7 +62,7 @@ Running `python splatnet2statink.py -M 900` from the command line launches the s
 
 3. Download the script by running `git clone https://github.com/frozenpandaman/splatnet2statink.git` (requires [Git](https://git-scm.com/download), pre-installed on macOS), or use the green "Clone or download" button above.
 
-4. Running the script for the first time will prompt you to enter your stat.ink API key, which can be found in your [profile settings](https://stat.ink/profile). If you're using the app in a language other than English, you may enter your [language code](https://github.com/frozenpandaman/splatnet2statink/wiki/languages) (locale) as well.
+4. Running the script for the first time will prompt you to enter your stat.ink API key, which can be found in your [profile settings](https://stat.ink/profile). If you're using the app in a language other than English, you may enter your [language code](https://github.com/frozenpandaman/splatnet2statink/wiki/languages) (locale) as well. Alternatively, these settings may be set in system ENV using the `STAT_INK_API_KEY`, `SPLATNET_COOKIE`, and `SPLATNET_LANG` variables.
 
 5. You will then be asked to enter your `iksm_session` token. To obtain it, follow the mitmproxy instructions [here](https://github.com/frozenpandaman/splatnet2statink/wiki/mitmproxy-instructions). This token (used to access your SplatNet battle results) along with your stat.ink API key and language will automatically be saved into `config.txt` for you. You're now ready to upload battles!
 

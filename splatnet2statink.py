@@ -10,7 +10,7 @@ from builtins import zip
 from builtins import str
 from builtins import range
 from past.utils import old_div
-import os.path, argparse, sys
+import os, os.path, argparse, sys
 import requests, json, time, datetime, random, re
 import msgpack, uuid
 import iksm, dbs
@@ -41,10 +41,10 @@ except (IOError, ValueError):
 
 #########################
 ## API KEYS AND TOKENS ##
-API_KEY       = config_data["api_key"] # for stat.ink
-YOUR_COOKIE   = config_data["cookie"] # iksm_session
+API_KEY       = os.environ.get("STAT_INK_API_KEY", config_data["api_key"]) # for stat.ink
+YOUR_COOKIE   = os.environ.get("SPLATNET_COOKIE", config_data["cookie"]) # iksm_session
 # SESSION_TOKEN = config_data["session_token"] # to generate new cookies in the future
-USER_LANG     = config_data["user_lang"] # only works with your game region's supported languages
+USER_LANG     = os.environ.get("SPLATNET_LANG", config_data["user_lang"]) # only works with your game region's supported languages
 #########################
 
 debug = False # print out payload and exit. can use with geargrabber2.py & saving battle jsons
